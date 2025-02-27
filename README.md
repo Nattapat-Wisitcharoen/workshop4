@@ -1,3 +1,3 @@
-## State Checking Skill Programing
+# State Checking Skill Programing
 
-# Nattapat Wisitcharoen
+## Nattapat Wisitcharoen
