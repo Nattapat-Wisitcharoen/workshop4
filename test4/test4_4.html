@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Sort - เรียงลำดับข้อมูลใน Array</title>
+</head>
+<body>
+    <h1>Bubble Sort - เรียงลำดับข้อมูลใน Array</h1>
+    <button onclick="generateAndSortArray()">สร้างและเรียงลำดับ Array</button>
+    
+    <div id="result" style="display: none;">
+        <h3>ค่าก่อนเรียง:</h3>
+        <p id="unsortedArray"></p>
+
+        <h3>ค่าหลังเรียง:</h3>
+        <p id="sortedArray"></p>
+    </div>
+
+    <script>
+        function bubbleSort(arr) {
+            let n = arr.length;
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = 0; j < n - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        // สลับตำแหน่ง
+                        let temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        function generateAndSortArray() {
+            // สร้าง Array ขนาด 100 ช่อง พร้อมตัวเลขสุ่ม
+            let arr = [];
+            for (let i = 0; i < 100; i++) {
+                arr.push(Math.floor(Math.random() * 1000)); // ตัวเลขสุ่มระหว่าง 0 ถึง 999
+            }
+
+            // แสดงค่าก่อนเรียง
+            document.getElementById("unsortedArray").innerText = arr.join(", ");
+
+            // เรียงลำดับด้วย Bubble Sort
+            let sortedArr = bubbleSort([...arr]); // ใช้ [...arr] เพื่อไม่เปลี่ยนแปลงค่าเดิมของ arr
+
+            // แสดงค่าหลังเรียง
+            document.getElementById("sortedArray").innerText = sortedArr.join(", ");
+
+            // แสดงผลเมื่อกดปุ่ม
+            document.getElementById("result").style.display = "block";
+        }
+    </script>
+</body>
+</html>

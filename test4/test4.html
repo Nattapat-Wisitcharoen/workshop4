@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-------------------- 4.1 คำนวณพื้นที่วงกลม ------------------------->
+    <!-- 
+    1. รับค่ารัศมี (radius) จากผู้ใช้
+    2. คำนวณพื้นที่วงกลมโดยใช้สูตร π * r^2 (where r = radius)
+    3. แสดงผลลัพธ์พื้นที่วงกลม 
+    -->
+
+    <h1>คำนวณพื้นที่วงกลม</h1>
+    <!-- Input สำหรับรับค่ารัศมี -->
+    <label for="radius">กรุณากรอกค่ารัศมี (radius):</label>
+    <input type="number" id="radius" name="radius" step="any" required>
+    <!-- ปุ่มคำนวณ -->
+    <button onclick="calculateArea()">คำนวณ</button>
+    <!-- แสดงผลลัพธ์ -->
+    <p id="result"></p>
+
+
+    <!----------------------- 4.2ตรวจสอบอายุ --------------------->
+    <h1>ตรวจสอบอายุ</h1>
+    <label for="age">กรุณากรอกอายุ:</label>
+    <input type="number" id="age" name="age" required>
+    <button onclick="checkAge()">ตรวจสอบ</button>
+    <p id="ageResult"></p>
+
+    <h1>ตรวจสอบเลขคู่หรือเลขคี่</h1>   
+    <label for="number">กรุณากรอกตัวเลข:</label>
+    <input type="number" id="number" name="number" required>
+    <button onclick="checkNumber()">ตรวจสอบ</button>
+    <p id="numberResult"></p>
+
+    <!------------------------ 4.3แสดงเลข ------------------------->
+    <h1>แสดงเลข 1-10 ด้วย For Loop</h1>
+    <button onclick="showNumbers()">แสดงเลข 1-10</button>
+    <div id="numbersResult"></div>
+    <h1>รับค่าจากผู้ใช้จนกว่าจะพิมพ์ 'exit'</h1>
+    <button onclick="getUserInput()">เริ่มรับข้อมูล</button>
+    <div id="userInputResult"></div>
+
+    
+    <script>
+        // ---------------------4.1 คำนวณพื้นที่วงกลม------------------
+        function calculateArea() {
+        // รับค่ารัศมีจาก input
+        let radius = parseFloat(document.getElementById("radius").value);
+        // คำนวณพื้นที่วงกลม
+            if (!isNaN(radius) && radius > 0) {
+                let area = Math.PI * Math.pow(radius, 2);
+                // แสดงผลลัพธ์
+                document.getElementById("result").innerText = "พื้นที่ของวงกลมที่มีรัศมี " + radius + " คือ: " + area.toFixed(2);
+            } else {
+                document.getElementById("result").innerText = "กรุณากรอกรัศมีที่ถูกต้อง!";
+            }
+        }
+
+        // --------------------4.2 ตรวจสอบอายุ---------------------
+        function checkAge() {
+            let age = parseInt(document.getElementById("age").value);
+            if (!isNaN(age) && age >= 0) {
+                let result = "";
+                if (age <= 12) {
+                    result = "เด็ก";
+                } else if (age >= 13 && age <= 19) {
+                    result = "วัยรุ่น";
+                } else {
+                    result = "ผู้ใหญ่";
+                }
+                document.getElementById("ageResult").innerText = "คุณเป็น: " + result;
+            } else {
+                document.getElementById("ageResult").innerText = "กรุณากรอกอายุที่ถูกต้อง!";
+            }
+        }
+
+        function checkNumber() {
+            let number = parseInt(document.getElementById("number").value);
+            if (!isNaN(number)) {
+                let result = (number % 2 === 0) ? "เลขคู่" : "เลขคี่";
+                document.getElementById("numberResult").innerText = "ตัวเลขที่กรอกคือ: " + result;
+            } else {
+                document.getElementById("numberResult").innerText = "กรุณากรอกตัวเลขที่ถูกต้อง!";
+            }
+        }
+
+        // ---------------------4.3 แสดงเลข 1-10 ด้วย For Loop------------------
+        function showNumbers() {
+            let result = "";
+            // ใช้ For Loop แสดงเลข 1 ถึง 10
+            for (let i = 1; i <= 10; i++) {
+                result += i + "<br>";
+            }
+            document.getElementById("numbersResult").innerHTML = result;
+        }
+        function getUserInput() {
+            let userInput = "";
+            let result = "";
+            // ใช้ While Loop รับค่าจากผู้ใช้จนกว่าจะพิมพ์ "exit"
+            while (userInput.toLowerCase() !== "exit") {
+                userInput = prompt("กรุณากรอกข้อมูล (พิมพ์ 'exit' เพื่อหยุด):");
+                if (userInput.toLowerCase() !== "exit") {
+                    result += "คุณกรอก: " + userInput + "<br>";
+                }
+            }
+            document.getElementById("userInputResult").innerHTML = result + "โปรแกรมจบการทำงานแล้ว!";
+        }
+
+        // --------------------4.6 การใช้งาน Debugger---------------------
+        function test() {
+            let x = 10;
+            // debugger; // หยุดที่จุดนี้
+            let y = 20;
+            console.log(x + y);
+            }
+            test();
+
+        function calculate(a, b) {
+            console.log('ค่าที่ส่งเข้า: ', a, b);
+            return a + b;
+        }
+            calculate(5, 10);
+
+        try {
+            let num = 10;
+            let result = num / 0;
+        if (!isFinite(result)) {
+            throw new Error("ไม่สามารถหารด้วยศูนย์");
+        }
+        } catch (error) {
+            console.log("ข้อผิดพลาด:", error.message);
+        }
+    </script>
+</body>
+</html>

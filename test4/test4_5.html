@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>คำนวณค่าแฟกทอเรียล</h1>
+    <label for="number">กรุณากรอกเลขที่ต้องการคำนวณแฟกทอเรียล:</label>
+    <input type="number" id="number" name="number" required>
+    <button onclick="calculateFactorial()">คำนวณ</button>
+    <p id="factorialResult"></p>
+
+    <h1>คำนวณค่า Fibonacci</h1>
+    <label for="fibonacciNumber">กรุณากรอกตำแหน่งที่ต้องการคำนวณ Fibonacci:</label>
+    <input type="number" id="fibonacciNumber" name="fibonacciNumber" required>
+    <button onclick="calculateFibonacci()">คำนวณ</button>
+    <p id="fibonacciResult"></p>
+
+    <script>
+               // ฟังก์ชัน Factorial
+               function factorial(n) {
+            if (n === 0 || n === 1) {
+                return 1;  // base case
+            }
+            return n * factorial(n - 1);  // recursion
+        }
+
+        function calculateFactorial() {
+            let n = parseInt(document.getElementById("number").value);
+            if (!isNaN(n) && n >= 0) {
+                let result = factorial(n);
+                document.getElementById("factorialResult").innerText = "ค่าแฟกทอเรียลของ " + n + " คือ: " + result;
+            } else {
+                document.getElementById("factorialResult").innerText = "กรุณากรอกเลขที่ไม่ติดลบ!";
+            }
+        }
+
+                // ฟังก์ชัน Fibonacci ด้วย Recursion
+                function fibonacci(n) {
+            if (n <= 1) {
+                return n;  // base case
+            }
+            return fibonacci(n - 1) + fibonacci(n - 2);  // recursion
+        }
+
+        function calculateFibonacci() {
+            let n = parseInt(document.getElementById("fibonacciNumber").value);
+            if (!isNaN(n) && n >= 0) {
+                let result = fibonacci(n);
+                document.getElementById("fibonacciResult").innerText = "ค่า Fibonacci ที่ตำแหน่ง " + n + " คือ: " + result;
+            } else {
+                document.getElementById("fibonacciResult").innerText = "กรุณากรอกเลขที่ไม่ติดลบ!";
+            }
+        }
+    </script>
+</body>
+</html>

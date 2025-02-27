@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Background Changer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            transition: background-color 0.5s ease;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Click the button to change background color</h1>
+    <!-- ปุ่มเพื่อเปลี่ยนสีพื้นหลัง -->
+    <button id="changeColorBtn" onclick="changeColor()">Change Color</button>
+    <!-- ปุ่มเพื่อแสดงข้อความ -->
+    <button id="messageBtn">Show Message</button>
+    <p id="message"></p>
+    <br>
+    <!-- ช่องกรอกข้อความเพื่อรับข้อมูลจากผู้ใช้ -->
+    <input type="text" id="inputBox" placeholder="Type something...">
+    
+    <h2>Sign Up Form</h2>
+    <!-- ฟอร์มสำหรับการสมัครสมาชิก -->
+    <form id="signupForm">
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="formMessage"></p>
+    
+    <script>
+        // ฟังก์ชันเพื่อเปลี่ยนสีพื้นหลังแบบสุ่ม
+        function changeColor() {
+            const colors = ["#FF5733", "#33FF57", "#3357FF", "#F3FF33", "#FF33A1"];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        // ตัวจัดการเหตุการณ์ที่จะแสดงข้อความเมื่อคลิกปุ่ม
+        document.getElementById("messageBtn").addEventListener("click", function() {
+            document.getElementById("message").textContent = "You clicked the button!";
+        });
+
+        // เปลี่ยนสีของปุ่มเมื่อเมาส์อยู่เหนือปุ่ม
+        document.getElementById("changeColorBtn").onmouseover = function() {
+            this.style.backgroundColor = "#ffcc00";
+        };
+        
+        // คืนค่าสีของปุ่มเมื่อเมาส์ออกจากปุ่ม
+        document.getElementById("changeColorBtn").onmouseout = function() {
+            this.style.backgroundColor = "#007bff";
+        };
+
+        // อัพเดตข้อความที่แสดงตามสิ่งที่ผู้ใช้พิมพ์ในช่องกรอก
+        document.getElementById("inputBox").onkeyup = function(event) {
+            document.getElementById("message").textContent = "You typed: " + event.target.value;
+        };
+
+        // การส่งฟอร์มเพื่อตรวจสอบอีเมล
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // ป้องกันการส่งฟอร์ม
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.com$/; // รูปแบบการตรวจสอบอีเมล
+
+            if (!emailPattern.test(email)) {
+                document.getElementById("formMessage").textContent = "Invalid email. It must contain '@' and end with '.com'";
+                document.getElementById("formMessage").style.color = "red";
+            } else {
+                document.getElementById("formMessage").textContent = `Thank you, ${name}! Your email is valid.`;
+                document.getElementById("formMessage").style.color = "green";
+            }
+        });
+    </script>
+</body>
+</html>

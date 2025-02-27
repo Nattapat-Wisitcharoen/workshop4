@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ทายเลขสุ่ม 6 หลัก</title>
+</head>
+<body>
+    <h1>ทายเลขสุ่ม 6 หลัก</h1>
+    <p>ทายเลขที่สุ่มออกมาจากระบบ (เลข 6 หลัก)</p>
+
+    <label for="guess">กรุณากรอกเลข 6 หลัก:</label>
+    <input type="number" id="guess" placeholder="ทายเลข...">
+    <button onclick="checkGuess()">ทายเลข</button>
+
+    <p id="result"></p>
+    <p id="random-number-display" style="font-weight: bold; color: green;"></p>
+
+    <script>
+        // สุ่มเลข 6 หลัก (ระหว่าง 100000 ถึง 999999)
+        const randomNumber = Math.floor(Math.random() * 900000) + 100000;
+
+        function checkGuess() {
+            const userGuess = document.getElementById('guess').value;
+            const resultElement = document.getElementById('result');
+            const randomNumberDisplay = document.getElementById('random-number-display');
+
+            // แสดงเลขที่ออก
+            randomNumberDisplay.innerHTML = "เลขที่ออกคือ: " + randomNumber;
+
+            // ตรวจสอบผลการทาย
+            if (userGuess == randomNumber) {
+                resultElement.innerHTML = "ทายถูกต้อง!";
+            } else {
+                resultElement.innerHTML = "ทายผิด! ลองใหม่อีกครั้ง.";
+            }
+        }
+    </script>
+</body>
+</html>

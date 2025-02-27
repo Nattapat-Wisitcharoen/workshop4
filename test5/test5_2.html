@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>คำนวณ GPA</title>
+</head>
+<body>
+
+    <h1>คำนวณ GPA</h1>
+    
+    <form id="gpaForm">
+    <label for="course1">รหัสวิชา 1 :</label><br>
+    คะแนนที่ได้: <input type="number" id="score1" required><br>
+    จำนวนหน่วยกิต: <input type="number" id="credit1" value="3" required><br><br>
+
+    <label for="course2">รหัสวิชา 2 :</label><br>
+    คะแนนที่ได้: <input type="number" id="score2" required><br>
+    จำนวนหน่วยกิต: <input type="number" id="credit2" value="3" required><br><br>
+
+    <label for="course3">รหัสวิชา 3 :</label><br>
+    คะแนนที่ได้: <input type="number" id="score3" required><br>
+    จำนวนหน่วยกิต: <input type="number" id="credit3" value="3" required><br><br>
+
+    <label for="course4">รหัสวิชา 4 :</label><br>
+    คะแนนที่ได้: <input type="number" id="score4" required><br>
+    จำนวนหน่วยกิต: <input type="number" id="credit4" value="3" required><br><br>
+
+    <label for="course5">รหัสวิชา 5 :</label><br>
+    คะแนนที่ได้: <input type="number" id="score5" required><br>
+    จำนวนหน่วยกิต: <input type="number" id="credit5" value="3" required><br><br>
+
+
+        <button type="submit">คำนวณ GPA</button>
+    </form>
+
+    <h2>ผลลัพธ์:</h2>
+    <div id="result"></div>
+
+    <script>
+        // ฟังก์ชันในการคำนวณเกรดตามคะแนน
+        function calculateGrade(score) {
+            if (score < 50) return 0;
+            else if (score >= 50 && score < 55) return 1;
+            else if (score >= 55 && score < 59) return 1.5;
+            else if (score >= 60 && score < 65) return 2;
+            else if (score >= 65 && score < 70) return 2.5;
+            else if (score >= 70 && score < 75) return 3;
+            else if (score >= 75 && score < 80) return 3.5;
+            else return 4;
+        }
+
+        document.getElementById('gpaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // รับข้อมูลจากฟอร์ม
+            let score1 = parseFloat(document.getElementById('score1').value);
+            let credit1 = parseFloat(document.getElementById('credit1').value);
+            let score2 = parseFloat(document.getElementById('score2').value);
+            let credit2 = parseFloat(document.getElementById('credit2').value);
+            let score3 = parseFloat(document.getElementById('score3').value);
+            let credit3 = parseFloat(document.getElementById('credit3').value);
+            let score4 = parseFloat(document.getElementById('score4').value);
+            let credit4 = parseFloat(document.getElementById('credit4').value);
+            let score5 = parseFloat(document.getElementById('score5').value);
+            let credit5 = parseFloat(document.getElementById('credit5').value);
+
+            // คำนวณ GPA และเกรด
+            let totalGradePoints = 0;
+            let totalCredits = credit1 + credit2 + credit3 + credit4 + credit5;
+
+            // คำนวณคะแนนเกรดและรวมเกรด
+            totalGradePoints += calculateGrade(score1) * credit1;
+            totalGradePoints += calculateGrade(score2) * credit2;
+            totalGradePoints += calculateGrade(score3) * credit3;
+            totalGradePoints += calculateGrade(score4) * credit4;
+            totalGradePoints += calculateGrade(score5) * credit5;
+
+            let gpa = totalGradePoints / totalCredits;
+
+            // แสดงผล GPA และเกรด
+            document.getElementById('result').innerHTML = 'GPA: ' + gpa.toFixed(2);
+        });
+    </script>
+
+</body>
+</html>
