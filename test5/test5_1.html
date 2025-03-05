@@ -23,6 +23,15 @@
                 const listItem = document.createElement('li');
                 listItem.textContent = itemText;
 
+                // เพิ่มปุ่ม Check
+                const checkButton = document.createElement('button');
+                checkButton.textContent = 'Check';
+                checkButton.addEventListener('click', () => {
+                    const isChecked = listItem.style.textDecoration === 'line-through';
+                    listItem.style.textDecoration = isChecked ? '' : 'line-through';
+                    saveToLocalStorage(); // บันทึกข้อมูลใหม่ลง LocalStorage
+                });
+                
                 // เพิ่มปุ่มลบ
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
@@ -32,6 +41,7 @@
                 });
 
                 listItem.appendChild(deleteButton);
+                listItem.appendChild(checkButton); // เพิ่มปุ่ม Check
                 itemList.appendChild(listItem);
                 itemInput.value = ''; // เคลียร์ช่องกรอก
 
@@ -43,7 +53,9 @@
         function saveToLocalStorage() {
             const items = [];
             document.querySelectorAll('li').forEach((li) => {
-                items.push(li.textContent.replace('Delete', '').trim());
+                const text = li.textContent.replace('DeleteCheck', '').trim();
+                const isChecked = li.style.textDecoration === 'line-through';
+                items.push({ text, isChecked });
             });
             localStorage.setItem('items', JSON.stringify(items));
         }
@@ -53,7 +65,12 @@
             const savedItems = JSON.parse(localStorage.getItem('items')) || [];
             savedItems.forEach(item => {
                 const listItem = document.createElement('li');
-                listItem.textContent = item;
+                listItem.textContent = item.text;
+
+                // สถานะการขีดฆ่าจาก localStorage
+                if (item.isChecked) {
+                    listItem.style.textDecoration = 'line-through';
+                }
 
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Delete';
@@ -62,7 +79,16 @@
                     saveToLocalStorage();
                 });
 
+                const checkButton = document.createElement('button');
+                checkButton.textContent = 'Check';
+                checkButton.addEventListener('click', () => {
+                    const isChecked = listItem.style.textDecoration === 'line-through';
+                    listItem.style.textDecoration = isChecked ? '' : 'line-through';
+                    saveToLocalStorage();
+                });
+
                 listItem.appendChild(deleteButton);
+                listItem.appendChild(checkButton);
                 itemList.appendChild(listItem);
             });
         }

@@ -92,45 +92,59 @@
         function showNumbers() {
             let result = "";
             // ใช้ For Loop แสดงเลข 1 ถึง 10
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 50; i++) {
                 result += i + "<br>";
             }
             document.getElementById("numbersResult").innerHTML = result;
         }
-        function getUserInput() {
-            let userInput = "";
-            let result = "";
-            // ใช้ While Loop รับค่าจากผู้ใช้จนกว่าจะพิมพ์ "exit"
-            while (userInput.toLowerCase() !== "exit") {
-                userInput = prompt("กรุณากรอกข้อมูล (พิมพ์ 'exit' เพื่อหยุด):");
-                if (userInput.toLowerCase() !== "exit") {
-                    result += "คุณกรอก: " + userInput + "<br>";
-                }
-            }
-            document.getElementById("userInputResult").innerHTML = result + "โปรแกรมจบการทำงานแล้ว!";
-        }
+        // function getUserInput() {
+        //     let userInput = "";
+        //     let result = "";
+        //     // ใช้ While Loop รับค่าจากผู้ใช้จนกว่าจะพิมพ์ "exit"
+        //     while (userInput.toLowerCase() !== "exit") {
+        //         userInput = prompt("กรุณากรอกข้อมูล (พิมพ์ 'exit' เพื่อหยุด):");
+        //         if (userInput.toLowerCase() !== "exit") {
+        //             result += "คุณกรอก: " + userInput + "<br>";
+        //         }
+        //     }
+        //     document.getElementById("userInputResult").innerHTML = result + "โปรแกรมจบการทำงานแล้ว!";
+        // }
 
-        // --------------------4.6 การใช้งาน Debugger---------------------
-        function test() {
-            let x = 10;
-            // debugger; // หยุดที่จุดนี้
+        function getUserInput() {
+        let userInput = "";
+        let result = "";
+    // ใช้ Do While Loop รับค่าจากผู้ใช้จนกว่าจะพิมพ์ "exit"
+        do {
+            userInput = prompt("กรุณากรอกข้อมูล (พิมพ์ 'exit' เพื่อหยุด):");
+            if (userInput.toLowerCase() !== "exit") {
+                result += "คุณกรอก: " + userInput + "<br>";
+            }
+        } while (userInput.toLowerCase() !== "exit");
+        document.getElementById("userInputResult").innerHTML = result + "โปรแกรมจบการทำงานแล้ว!";
+}
+
+
+// --------------------4.6 การใช้งาน Debugger---------------------
+function test() {
+    let x = 10;
+    debugger; // หยุดที่จุดนี้
             let y = 20;
             console.log(x + y);
-            }
-            test();
+        }
+        test();
 
         function calculate(a, b) {
             console.log('ค่าที่ส่งเข้า: ', a, b);
             return a + b;
         }
-            calculate(5, 10);
-
+        calculate(5, 10);
+        
         try {
             let num = 10;
             let result = num / 0;
-        if (!isFinite(result)) {
-            throw new Error("ไม่สามารถหารด้วยศูนย์");
-        }
+            if (!isFinite(result)) {
+                throw new Error("ไม่สามารถหารด้วยศูนย์");
+            }
         } catch (error) {
             console.log("ข้อผิดพลาด:", error.message);
         }

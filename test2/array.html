@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manipulation with Input</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .array-container {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Array Manipulation</h1>
+    
+    <!-- ฟอร์มกรอกข้อมูล -->
+    <div>
+        <input type="number" id="input-value" placeholder="กรอกตัวเลข" />
+        <button onclick="addToArray()">เพิ่มข้อมูล</button>
+    </div>
+
+    <div class="array-container">
+        <p>Array: <span id="array-display">[1, 2, 3, 4, 5]</span></p>
+    </div>
+
+    <button onclick="removeFirst()">Remove First</button>
+    <button onclick="removeLast()">Remove Last</button>
+
+    <script>
+        let array = [1, 2, 3, 4, 5];
+
+        // ฟังก์ชันเพิ่มข้อมูลลงในอาร์เรย์
+        function addToArray() {
+            const inputValue = document.getElementById("input-value").value; // รับค่าจาก input
+            if (inputValue) {
+                array.push(Number(inputValue)); // เพิ่มค่าที่กรอกลงในอาร์เรย์
+                document.getElementById("input-value").value = ''; // ล้างช่องกรอกข้อมูล
+                updateArrayDisplay(); // อัปเดตการแสดงผลของอาร์เรย์
+            } else {
+                alert("กรุณากรอกตัวเลข");
+            }
+        }
+
+        // ฟังก์ชันสำหรับลบเลขตัวหน้าสุด
+        function removeFirst() {
+            array.shift(); // ลบตัวแรกของอาร์เรย์
+            updateArrayDisplay();
+        }
+
+        // ฟังก์ชันสำหรับลบเลขตัวหลังสุด
+        function removeLast() {
+            array.pop(); // ลบตัวหลังสุดของอาร์เรย์
+            updateArrayDisplay();
+        }
+
+        // ฟังก์ชันสำหรับอัปเดตการแสดงผลของอาร์เรย์
+        function updateArrayDisplay() {
+            document.getElementById("array-display").textContent = JSON.stringify(array);
+        }
+    </script>
+</body>
+</html>
